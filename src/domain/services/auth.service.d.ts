@@ -1,5 +1,5 @@
 import { Iuser } from "../entities";
 
 export interface IAuthService{
-    register():Promise<Iuser|null>
+    register(user:Iuser):Promise<Iuser>
 }
