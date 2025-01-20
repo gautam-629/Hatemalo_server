@@ -1,5 +1,6 @@
+import { CreateUserDto, UserDto } from '../../application/dtos/user.dtos';
 import { Iuser } from '../entities';
 
 export interface IUserservice {
-  create(user: Iuser): Promise<Iuser>;
+  create(user: CreateUserDto): Promise<UserDto>;
 }

@@ -1,6 +1,7 @@
+import { UserDto } from '../../application/dtos/user.dtos';
 import { Iuser } from '../entities';
 
 export interface IUserRepository {
-  create(user: Iuser): Promise<Iuser>;
+  create(user: CreateUserDto): Promise<UserDto>;
   findByEmail(email:string):Promise<Iuser | null>;
 }

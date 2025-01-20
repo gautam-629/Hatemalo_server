@@ -1,22 +1,25 @@
-import { NextFunction, Request, Response } from 'express';
-import { ZodSchema, ZodError } from 'zod';
+import { plainToClass } from 'class-transformer';
+import { validate, ValidationError } from 'class-validator';
+import { Request, Response, NextFunction } from 'express';
 import CustomErrorHandler from '../../util/customErrorHandler';
 
-class SchemaValidator {
-  static validate(schema: ZodSchema<any>) {
-    return (req: Request, res: Response, next: NextFunction) => {
-      try {
-        schema.parse(req.body);
-        next();
-      } catch (error:any) {
-        if (error instanceof ZodError) {
-          next(new CustomErrorHandler(400, 'Validation Error', error.errors.map((error)=>error.message)));
-        } else {
-          next(error);
-        }
-      }
-    };
-  }
-}
+export function validationMiddleware(dtoClass: any) {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    const dtoObj = plainToClass(dtoClass, req.body);
+    const errors = await validate(dtoObj, { 
+      whitelist: true,
+      forbidNonWhitelisted: true 
+    });
 
-export default SchemaValidator;
+    if (errors.length > 0) {
+      const validationErrors = errors.map((error: ValidationError) => {
+        return Object.values(error.constraints || {});
+      }).flat();
+      
+      next(new CustomErrorHandler(400, 'Validation Error', validationErrors));
+    } else {
+      req.body = dtoObj;
+      next();
+    }
+  };
+}

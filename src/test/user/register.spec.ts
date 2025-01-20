@@ -32,7 +32,6 @@ describe('POST /user', () => {
           const userData={
              email:"example@gmail.com",
              password:"secret@123",
-             role:'user'
           }
 
           //act
@@ -47,7 +46,6 @@ describe('POST /user', () => {
           const userData={
              email:"example@gmail.com",
              password:"secret@123",
-             role:'user'
           }
 
           //act
@@ -62,7 +60,6 @@ describe('POST /user', () => {
           const userData={
              email:"example@gmail.com",
              password:"secret@123",
-             role:'user'
           }
 
           //act
@@ -80,7 +77,6 @@ describe('POST /user', () => {
           const userData={
              email:"example@gmail.com",
              password:"secret@123",
-             role:'user'
           }
 
           //act
@@ -106,7 +102,7 @@ describe('POST /user', () => {
 
         //Assert
           const user= await userRepository.find()
-          expect(response.statusCode).toBe(409);
+          expect(response.statusCode).toBe(400);
           expect(user).toHaveLength(1)
         
       })

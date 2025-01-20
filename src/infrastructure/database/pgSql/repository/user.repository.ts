@@ -3,6 +3,7 @@ import { Iuser } from '../../../../domain/entities';
 import { IUserRepository } from '../../../../domain/repositories';
 import { User } from '../entity/User';
 import { AppDataSource } from '../data-source';
+import { CreateUserDto, UserDto } from '../../../../application/dtos/user.dtos';
 
 export class UserRepository implements IUserRepository {
   private userRepository: Repository<User>;
@@ -11,7 +12,7 @@ export class UserRepository implements IUserRepository {
     this.userRepository = AppDataSource.getRepository(User);
   }
 
-  async create(user: Iuser): Promise<Iuser> {
+  async create(user: CreateUserDto): Promise<UserDto> {
     return this.userRepository.save(user);
   }
 
