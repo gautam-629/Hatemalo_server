@@ -128,6 +128,19 @@ describe('POST /user', () => {
         expect(users[0].password).toHaveLength(60); 
         expect(users[0].password).toMatch(/^\$2[aby]\$\d{2}\$.{53}$/); 
       });
+      it('should return jwt token', async () => {
+        // Arrange
+        const userData = {
+          email: "example@gmail.com",
+          password: "secret@123",
+        };
+        
+        // Act
+        const response= await request(app).post('/api/v1/auth/register').send(userData);
+      
+        // Assert
+        expect(response.body).toHaveProperty("data.token")
+      });
       
  })
 });

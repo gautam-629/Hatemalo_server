@@ -7,7 +7,7 @@ class AuthController{
    async register(req:Request,res:Response,next:NextFunction){
     try {
         const user=await this.authService.register(req.body)
-        ResponseHandler.success(res,{id:user.id},'User Create Sucessfully',201)
+        ResponseHandler.success(res,user,'User Create Sucessfully',201)
     } catch (error) {
         next(error)
     }
