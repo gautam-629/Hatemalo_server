@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  manage-container:
+    image: postgres
+    container_name: manage-container
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - '5432:5432'
+    volumes:
+      - manage:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  manage:
+    name: manage
