@@ -9,7 +9,7 @@ const userRepository=new UserRepository()
 const authService=new AuthService(userRepository)
 const authController=new AuthController(authService)
 export const authRouter=(router:Router)=>{
-   router.post('/login',
+   router.post('/auth/register',
      SchemaValidator.validate(createUserSchema),
     (req:Request,res:Response,next:NextFunction)=>authController.register(req,res,next))
 }
