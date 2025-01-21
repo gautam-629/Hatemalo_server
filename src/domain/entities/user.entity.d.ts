@@ -1,10 +1,13 @@
-import { UserRole } from '../../enum';
+import { UserType } from '../../enum';
 
 export interface Iuser {
   id: string;
   email: string;
+  name:string;
   password: string;
-  role: UserRole;
+  phoneNumber:string;
+  userType:UserType
+  profilePicture:string
   createdAt:Date,
   updatedAt:Date
 }

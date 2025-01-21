@@ -1,24 +1,53 @@
 import { Exclude, Expose } from 'class-transformer';
-import { IsEmail, MinLength, IsString, IsOptional } from 'class-validator';
-import { UserRole } from '../../enum';
+import { IsEmail, MinLength, IsString, minLength, MaxLength, IsOptional, IsEnum } from 'class-validator';
+import { UserRole, UserType } from '../../enum';
 
 export class CreateUserDto {
   @IsEmail({}, { message: "Invalid email address" })
   @IsString()
   email: string;
 
+  @IsOptional()
+  @IsString({ message: "Profile picture must be a string" })
+  profilePicture: string;
+
+  @IsString({ message: "Phone number must be a string" })
+  phoneNumber: string;
+
+  @MinLength(3, { message: 'Name must be at least 3 characters' })
+  @MaxLength(50, { message: 'Name must not exceed 50 characters' }) // Adjusted to allow longer names
+  @IsString()
+  name: string;
+
+  @IsEnum(UserType, { message: 'Invalid user type' })
+  @IsString()
+  userType: UserType;
+
   @MinLength(6, { message: "Password must be at least 6 characters long" })
   @IsString()
   password: string;
 }
 
+
 @Exclude()
-export class UserDto {
+export class UserDto{
   @Expose()
   id: string;
+ 
+  @Expose()
+   name: string;
 
   @Expose()
-  email: string;
+   phoneNumber: string;
+
+   @Expose()
+   userType: UserType;
+
+   @Expose()
+   profilePicture: string;
+
+   @Expose()
+   email: string;
 
   @Expose()
   role: UserRole;

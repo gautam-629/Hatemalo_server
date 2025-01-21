@@ -3,6 +3,10 @@ export enum UserRole {
   AGENT = 'agent',
   PLAYER = 'player',
 }
+export enum UserType{
+  provider='provider',
+  partner='partner'
+}
 export enum ErrorMessages {
   AlreadyExist = 'Resource already exists.',
   TimeExpire = 'Time Expire',
