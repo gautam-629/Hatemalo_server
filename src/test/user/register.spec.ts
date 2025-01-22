@@ -2,7 +2,7 @@ import "reflect-metadata";
 import app from '../../app';
 import request from 'supertest';
 import { AppDataSource } from '../../infrastructure/database/pgSql/data-source';
-import { User } from '../../infrastructure/database/pgSql/entity/User';
+import { User } from '../../infrastructure/database/pgSql/entity/User.entity';
 import { DataSource } from "typeorm";
 import { response } from "express";
 

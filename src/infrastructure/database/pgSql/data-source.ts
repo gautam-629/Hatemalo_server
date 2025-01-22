@@ -1,7 +1,7 @@
 // src/infrastructure/database/pgSql/data-source.ts
 import { DataSource } from 'typeorm';
 import { Config } from '../../../config';
-import { User } from './entity/User';
+import { User } from './entity/User.entity';
 
 const AppDataSource = new DataSource({
   type: 'postgres',
