@@ -7,7 +7,6 @@ export interface Iuser {
   password: string;
   phoneNumber:string;
   userType:UserType
-  profilePicture:string
   createdAt:Date,
   updatedAt:Date
 }

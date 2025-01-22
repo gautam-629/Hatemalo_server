@@ -5,7 +5,8 @@ export enum UserRole {
 }
 export enum UserType{
   provider='provider',
-  partner='partner'
+  partner='partner',
+  admin='admin'
 }
 export enum ErrorMessages {
   AlreadyExist = 'Resource already exists.',

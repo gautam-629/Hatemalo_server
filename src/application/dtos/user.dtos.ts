@@ -7,10 +7,6 @@ export class CreateUserDto {
   @IsString()
   email: string;
 
-  @IsOptional()
-  @IsString({ message: "Profile picture must be a string" })
-  profilePicture: string;
-
   @IsString({ message: "Phone number must be a string" })
   phoneNumber: string;
 
@@ -44,13 +40,7 @@ export class UserDto{
    userType: UserType;
 
    @Expose()
-   profilePicture: string;
-
-   @Expose()
    email: string;
-
-  @Expose()
-  role: UserRole;
 
   @Expose()
   createdAt: Date;

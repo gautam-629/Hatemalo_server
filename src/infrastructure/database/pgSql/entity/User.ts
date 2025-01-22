@@ -12,9 +12,6 @@ export class User implements Iuser {
 
   @Column({type:'varchar',length:255})
   phoneNumber: string;
- 
-  @Column({type:'varchar',length:255})
-   profilePicture: string;
 
   @Column({type:'varchar',length:255})
   userType: UserType;
