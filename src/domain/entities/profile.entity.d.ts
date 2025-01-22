@@ -1,6 +1,6 @@
-export class IProfile{
+export class IPhoto{
     id:string
-    profile:string
+    photo:string
     createdAt:string;
     updateAt:string;
 }

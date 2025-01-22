@@ -1,14 +1,14 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { IProfile } from "../../../../domain/entities";
+import { IPhoto } from "../../../../domain/entities";
 
 @Entity("photos")
-export class Photo implements IProfile{
+export class Photo implements IPhoto{
    
     @PrimaryGeneratedColumn()
     id: string;
 
     @Column({type:'varchar'})
-     profile: string;
+     photo: string;
 
     @UpdateDateColumn()
     updateAt: string;
