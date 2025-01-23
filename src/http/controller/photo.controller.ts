@@ -35,13 +35,13 @@ export class PhotoController{
  async deleteById(req:Request,res:Response,next:NextFunction){
       try {
          const {id}=req.params;
-         const deleted=await this.photoService.deleteById(id);
+         const deleted= await this.photoService.deleteById(id);
          if(!deleted){
           return next(CustomErrorHandler.notFound("Photo not found"))
          }
-         return ResponseHandler.success(res,deleted,"Photo Deleted Sucessfully",204)
+         return ResponseHandler.success(res,null,"Photo Deleted Sucessfully",200)
       } catch (error) {
-          return next(error)
+         next(error)
       }
  }
 }

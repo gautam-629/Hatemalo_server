@@ -17,8 +17,8 @@ export class PhotoRepository implements IPhotoRepository{
     }
 
     async deleteById(id: string): Promise<boolean> {
-        const result = await this.photoRepository.delete(id);
-        return result?.affected! > 0;
+        const result= await this.photoRepository.createQueryBuilder().delete().from(Photo).where("id=:id",{id:id}).execute()
+        return result.affected ? result.affected > 0 : false;
       }
 
      create(url: string): Promise<IPhoto> {
