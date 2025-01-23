@@ -1,6 +1,7 @@
 import { NextFunction ,Request,Response} from "express";
 import { PhotoService } from "../../application/services/photo.service";
 import CustomErrorHandler from "../../util/customErrorHandler";
+import ResponseHandler from "../../util/responseHandler";
 
 export class PhotoController{
   constructor(private photoService:PhotoService){}
@@ -19,5 +20,28 @@ export class PhotoController{
     }
   }
 
-
+ async findById(req:Request,res:Response,next:NextFunction){
+     try {
+         const {id}=req.params;
+         const photo= await this.photoService.findById(id);
+         if(!photo){
+          return next(CustomErrorHandler.notFound("Photo not found"))
+         }
+         return ResponseHandler.success(res,photo,"Sucess",200)
+     } catch (error) {
+      return next(error)
+     }
+  }
+ async deleteById(req:Request,res:Response,next:NextFunction){
+      try {
+         const {id}=req.params;
+         const deleted=await this.photoService.deleteById(id);
+         if(!deleted){
+          return next(CustomErrorHandler.notFound("Photo not found"))
+         }
+         return ResponseHandler.success(res,deleted,"Photo Deleted Sucessfully",204)
+      } catch (error) {
+          return next(error)
+      }
+ }
 }

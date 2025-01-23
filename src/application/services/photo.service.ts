@@ -1,7 +1,7 @@
 import { IFileUploader } from "../../common/file.uploader";
 import { IPhoto } from "../../domain/entities";
 import { IPhotoService } from "../../domain/services";
-import { PhotoRepository } from "../../infrastructure/database/pgSql/repository/profile.repository";
+import { PhotoRepository } from "../../infrastructure/database/pgSql/repository/photo.repository";
 
 export class PhotoService implements IPhotoService{
      constructor(
@@ -15,14 +15,24 @@ export class PhotoService implements IPhotoService{
       }
   
       try {
-      //   const photoData = {
-      //     photo: file.filename,
-      //   };
-  
         return await this.photoRepository.create(file.filename);
       } catch (error) {
         this.fileUploader.deleteFile(file.filename);
         throw error;
       }
     }
-}
+    findById(id: string): Promise<IPhoto | null> {
+       return this.photoRepository.findById(id)
+    }
+
+    async deleteById(id: string): Promise<boolean> {
+      const photo= await this.photoRepository.findById(id)
+      if(!photo){
+         return false
+      }
+      this.fileUploader.deleteFile(photo.photo)
+      return this.photoRepository.deleteById(id)
+    }
+  }
+  
+
