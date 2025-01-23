@@ -10,6 +10,6 @@ const photoService=new PhotoService(photoRepository,fileUploader)
 const photoController=new PhotoController(photoService)
 export const photoRouter=(router:Router):void=>{
       router.post('/upload',
-            fileUploader.single("photo"),
-            (req,res,next)=>photoController.create(req,res,next))
+       fileUploader.single("photo"),
+       (req,res,next)=>photoController.create(req,res,next))
 }

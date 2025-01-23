@@ -1,12 +1,12 @@
+import { IFileUploader } from "../../common/file.uploader";
 import { IPhoto } from "../../domain/entities";
 import { IPhotoService } from "../../domain/services";
 import { PhotoRepository } from "../../infrastructure/database/pgSql/repository/profile.repository";
-import { FileUploader } from "../../util/fileUpload";
 
 export class PhotoService implements IPhotoService{
      constructor(
         private photoRepository:PhotoRepository,
-        private fileUploader:FileUploader
+        private fileUploader:IFileUploader
      ){}
 
      async create(file: Express.Multer.File): Promise<IPhoto> {
