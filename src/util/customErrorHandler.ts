@@ -13,7 +13,9 @@ class CustomErrorHandler extends Error {
     static alreadyExist(message: string = ErrorMessages.AlreadyExist) {
         return new CustomErrorHandler(409, message);
     }
-
+    static badRequest(message: string = ErrorMessages.AlreadyExist) {
+        return new CustomErrorHandler(409, message);
+    }
     static timeExpire(message: string = ErrorMessages.TimeExpire) {
         return new CustomErrorHandler(500, message);
     }
