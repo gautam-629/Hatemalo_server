@@ -2,6 +2,7 @@
 import { DataSource } from 'typeorm';
 import { Config } from '../../../config';
 import { User } from './entity/User.entity';
+import { Photo } from './entity/profile.entity';
 
 const AppDataSource = new DataSource({
   type: 'postgres',
@@ -14,7 +15,7 @@ const AppDataSource = new DataSource({
   // synchronize: Config.NODE_ENV == 'test',
   logging: false,
   // Use direct entity reference instead of path
-  entities: [User],
+  entities: [User,Photo],
   migrations: ['src/infrastructure/database/pgSql/migration/*.{ts,js}'],
   subscribers: [],
 });
