@@ -8,4 +8,8 @@ export class UserService implements IUserservice {
   async create(user: CreateUserDto): Promise<UserDto> {
     return this.userRepository.create(user);
   }
+
+async  findAllUsers(): Promise<UserDto[] | null> {
+    return this.userRepository.findAllUsers()
+  }
 }

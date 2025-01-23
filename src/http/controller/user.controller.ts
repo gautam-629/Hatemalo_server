@@ -14,5 +14,13 @@ export class UserController {
     }
   }
 
+ async findAllUsers(req:Request,res:Response,next:NextFunction){
+       try {
+        const users = await this.userService.findAllUsers()
+        return ResponseHandler.success(res,users,"Sucess",201)
+       } catch (error) {
+          next(error)
+       }
+  }
   
 }

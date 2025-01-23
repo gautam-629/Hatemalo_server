@@ -9,7 +9,11 @@ const userRepository=new UserRepository()
 const userService=new UserService(userRepository)
 const userController= new UserController(userService)
 export const userRouter = (router: Router): void => {
-    router.post('/create',
+    router.post('users/create',
     validationMiddleware(CreateUserDto),
        (req:Request, res:Response, next:NextFunction) => userController.create(req, res, next));
-  };
+
+    router.get('/users',(req,res,next)=>{
+           userController.findAllUsers(req,res,next)
+    }) 
+  }

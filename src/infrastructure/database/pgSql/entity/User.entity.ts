@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, CreateDateColumn, OneToMany } from 'typeorm';
 import { Iuser } from '../../../../domain/entities';
 import { UserType } from '../../../../enum';
+import { Photo } from './photo.entity';
 
 @Entity('users')
 export class User implements Iuser {
@@ -25,6 +26,9 @@ export class User implements Iuser {
   @UpdateDateColumn()
   createdAt: Date;
  
+ @OneToMany(()=>Photo,(photo)=>photo.user)
+  photo:Photo[]
+
   @CreateDateColumn()
   updatedAt: Date;
 }

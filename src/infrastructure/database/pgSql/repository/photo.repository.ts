@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 import { IPhotoRepository } from "../../../../domain/repositories";
-import { Photo } from "../entity/profile.entity";
+import { Photo } from "../entity/photo.entity";
 import { AppDataSource } from "../data-source";
 import { IPhoto } from "../../../../domain/entities";
 

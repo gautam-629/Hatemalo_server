@@ -16,6 +16,15 @@ export class UserRepository implements IUserRepository {
     return this.userRepository.save(user);
   }
 
+
+  async findAllUsers(): Promise<UserDto[] | null> {
+    return this.userRepository.find({
+      relations:{
+        photo:true
+      }
+    })
+  }
+
   findByEmail(email: string): Promise<Iuser | null> {
     return this.userRepository.findOneBy({email:email})
   }

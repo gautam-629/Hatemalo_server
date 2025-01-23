@@ -2,7 +2,7 @@
 import { DataSource } from 'typeorm';
 import { Config } from '../../../config';
 import { User } from './entity/User.entity';
-import { Photo } from './entity/profile.entity';
+import { Photo } from './entity/photo.entity';
 
 const AppDataSource = new DataSource({
   type: 'postgres',

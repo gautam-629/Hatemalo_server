@@ -1,6 +1,7 @@
 import { Exclude, Expose } from 'class-transformer';
 import { IsEmail, MinLength, IsString, minLength, MaxLength, IsOptional, IsEnum } from 'class-validator';
 import { UserRole, UserType } from '../../enum';
+import { Photo } from '../../infrastructure/database/pgSql/entity/photo.entity';
 
 export class CreateUserDto {
   @IsEmail({}, { message: "Invalid email address" })
@@ -41,6 +42,7 @@ export class UserDto{
 
    @Expose()
    email: string;
+
 
   @Expose()
   createdAt: Date;
