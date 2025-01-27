@@ -11,6 +11,7 @@ export class AsyncLocalStorage implements IAsyncLocalStorage{
           const session=AsyncLocalStorage.nameSpace;
           session.run(()=>{
               session.set("user",data)
+              next()
           })
      }
 

@@ -5,7 +5,6 @@ import { UserRepository } from "../../infrastructure/database/pgSql/repository/u
 import { AsyncLocalStorage } from "../../util/asyncLocalStorage";
 import { JwtToken } from "../../util/jwtToken";
 import CustomErrorHandler from "../../util/customErrorHandler";
-
 type CheckOptions = {
   checkAdmin?: boolean;
   checkProvider?: boolean;
@@ -18,7 +17,8 @@ export interface AuthenticatedRequest extends Request {
     authorization?: string;
   };
 }
- class AuthMiddleware {
+
+class AuthMiddleware {
   private jwtToken: JwtToken;
   private userRepository: IUserRepository;
   private asyncLocalStorage: IAsyncLocalStorage;
@@ -33,7 +33,7 @@ export interface AuthenticatedRequest extends Request {
     checkAdmin = false,
     checkProvider = false,
     checkSeeker = false,
-  }: CheckOptions) => {
+  }: CheckOptions = {}) => {
     return async (
       req: AuthenticatedRequest,
       res: Response,
@@ -42,45 +42,47 @@ export interface AuthenticatedRequest extends Request {
       try {
         const authHeader = req.headers.authorization;
         if (!authHeader) {
-          throw CustomErrorHandler.unAuthorized();
+          throw CustomErrorHandler.unAuthorized("Authorization header missing");
         }
 
         const token = authHeader.split(" ")[1];
         if (!token) {
-          throw CustomErrorHandler.unAuthorized();
+          throw CustomErrorHandler.unAuthorized("Token missing");
         }
 
         const payload = this.jwtToken.verifyToken(token);
         if (!payload) {
-          throw CustomErrorHandler.unAuthorized();
+          throw CustomErrorHandler.unAuthorized("Invalid token");
         }
 
-        const roles: Record<string, boolean> = {
-          admin: checkAdmin,
-          provider: checkProvider,
-          seeker: checkSeeker,
-        };
+        if (checkAdmin || checkProvider || checkSeeker) {
+          const roles: Record<string, boolean> = {
+            admin: checkAdmin,
+            provider: checkProvider,
+            seeker: checkSeeker,
+          };
 
-        const hasValidRole = Object.keys(roles).some(
-          (role) => roles[role] && payload.role === role
-        );
+          const hasValidRole = Object.keys(roles).some(
+            (role) => roles[role] && payload.role === role
+          );
 
-        if (!hasValidRole) {
-          throw CustomErrorHandler.unAuthorized();
+          if (!hasValidRole) {
+            throw CustomErrorHandler.unAuthorized("Access denied for this role");
+          }
         }
 
         const user = await this.userRepository.findById(payload.sub);
         if (!user) {
-          throw CustomErrorHandler.unAuthorized();
+          throw CustomErrorHandler.unAuthorized("User not found");
         }
 
         req.user = { sub: payload.sub };
         this.asyncLocalStorage.setUser(user, next);
       } catch (error) {
-        next(error); 
+        next(error);
       }
     };
   };
 }
 
-export const authMiddleware=new AuthMiddleware()
+export const authMiddleware = new AuthMiddleware();
