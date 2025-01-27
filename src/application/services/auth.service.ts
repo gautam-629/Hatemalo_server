@@ -1,10 +1,11 @@
-import { plainToClass } from 'class-transformer';
+import { plainToClass, plainToInstance } from 'class-transformer';
 import { IAuthService } from "../../domain/services";
 import { UserRepository } from "../../infrastructure/database/pgSql/repository/user.repository";
 import CustomErrorHandler from "../../util/customErrorHandler";
 import bcrypt from 'bcryptjs';
 import { JwtToken } from "../../util/jwtToken";
-import { CreateUserDto, UserDto } from '../dtos/user.dtos';
+import { CreateUserDto, UserDto } from '../dtos/register.user.dtos';
+import { LoginUserDto } from '../dtos/login.user.dtos';
 
 export class AuthService implements IAuthService {
     constructor(
@@ -37,4 +38,27 @@ export class AuthService implements IAuthService {
             token
         }, { excludeExtraneousValues: true });
     }
+
+    async login(userInput: LoginUserDto): Promise<UserDto> {
+        const user=  await this.userRepository.findByEmail(userInput.email);
+
+        if(!user){
+            throw CustomErrorHandler.unAuthorized("UserName or Password Wrong!")
+        }
+        const isPasswordValid= await bcrypt.compare(userInput.password,user.password)
+
+        if(!isPasswordValid){
+            throw CustomErrorHandler.unAuthorized("Username or Password Wrong!")
+        }
+          const payload={
+            sub:user.id,
+            role:user.updatedAt
+          }
+        const token=this.jwtToken.generateToken(payload)
+
+        return plainToInstance(UserDto,{
+            ...user,
+            token
+        },{excludeExtraneousValues:true})
+    }  
 }

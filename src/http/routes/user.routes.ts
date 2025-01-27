@@ -3,7 +3,7 @@ import { UserRepository } from '../../infrastructure/database/pgSql/repository/u
 import { UserService } from '../../application/services/user.service';
 import { UserController } from '../controller';
 import { validationMiddleware } from '../middleware/schemaValidator';
-import { CreateUserDto } from '../../application/dtos/user.dtos';
+import { CreateUserDto } from '../../application/dtos/register.user.dtos';
 
 const userRepository=new UserRepository()
 const userService=new UserService(userRepository)

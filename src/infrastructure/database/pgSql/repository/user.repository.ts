@@ -3,7 +3,7 @@ import { Iuser } from '../../../../domain/entities';
 import { IUserRepository } from '../../../../domain/repositories';
 import { User } from '../entity/User.entity';
 import { AppDataSource } from '../data-source';
-import { CreateUserDto, UserDto } from '../../../../application/dtos/user.dtos';
+import { CreateUserDto, UserDto } from '../../../../application/dtos/register.user.dtos';
 
 export class UserRepository implements IUserRepository {
   private userRepository: Repository<User>;

@@ -1,7 +1,7 @@
 import { Iuser } from '../../domain/entities';
 import { IUserservice } from '../../domain/services';
 import { UserRepository } from '../../infrastructure/database/pgSql/repository/user.repository';
-import { CreateUserDto, UserDto } from '../dtos/user.dtos';
+import { CreateUserDto, UserDto } from '../dtos/register.user.dtos';
 
 export class UserService implements IUserservice {
   constructor(private userRepository: UserRepository) {}

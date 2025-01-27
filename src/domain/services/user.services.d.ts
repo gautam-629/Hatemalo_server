@@ -1,4 +1,4 @@
-import { CreateUserDto, UserDto } from '../../application/dtos/user.dtos';
+import { CreateUserDto, UserDto } from '../../application/dtos/register.user.dtos';
 import { Iuser } from '../entities';
 
 export interface IUserservice {
