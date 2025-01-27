@@ -1,4 +1,5 @@
-interface IJwtToken{
-    generateToken(payload:Object):string
-    verifyToken(token:string):strig | object
-}
+export interface IJwtToken {
+    generateToken(payload: { sub: string; role: string }): string;
+    verifyToken(token: string): JwtPayloadWithRole;
+  }
+  

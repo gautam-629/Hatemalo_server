@@ -25,6 +25,10 @@ export class UserRepository implements IUserRepository {
     })
   }
 
+  findById(id: string): Promise<Iuser | null> {
+    return this.userRepository.findOneBy({id:id})
+  }
+
   findByEmail(email: string): Promise<Iuser | null> {
     return this.userRepository.findOneBy({email:email})
   }

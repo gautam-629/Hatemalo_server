@@ -52,7 +52,7 @@ export class AuthService implements IAuthService {
         }
           const payload={
             sub:user.id,
-            role:user.updatedAt
+            role:user.userType
           }
         const token=this.jwtToken.generateToken(payload)
 
