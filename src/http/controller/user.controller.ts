@@ -1,9 +1,9 @@
 import { Response, Request, NextFunction } from 'express';
-import { UserService } from '../../application/services/user.service';
 import ResponseHandler from '../../util/responseHandler';
+import { IUserservice } from '../../domain/services';
 
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private userService: IUserservice) {}
   async create(req: Request, res: Response, next: NextFunction) {
 
     try {

@@ -1,7 +1,7 @@
 import { Config } from "../config";
 import jwt from 'jsonwebtoken'
 import CustomErrorHandler from "./customErrorHandler";
-export class JwtToken{
+export class JwtToken implements IJwtToken{
     private secretKey:string;
     private expiresIn:string;
 

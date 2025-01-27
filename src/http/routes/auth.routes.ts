@@ -13,6 +13,7 @@ const userRepository=new UserRepository()
 const jwtToken=new JwtToken()
 const authService=new AuthService(userRepository,jwtToken)
 const authController=new AuthController(authService,logger)
+
 export const authRouter=(router:Router)=>{
    router.post('/auth/register',
     validationMiddleware(CreateUserDto),

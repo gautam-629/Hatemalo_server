@@ -1,11 +1,11 @@
 import { NextFunction, Request ,Response} from "express";
-import { AuthService } from "../../application/services/auth.service";
 import ResponseHandler from "../../util/responseHandler";
 import { Logger } from "winston";
+import { IAuthService } from "../../domain/services";
 
 class AuthController{
     constructor( 
-        private authService:AuthService,
+        private authService:IAuthService,
         private logger:Logger
     ){}
    async register(req:Request,res:Response,next:NextFunction){
