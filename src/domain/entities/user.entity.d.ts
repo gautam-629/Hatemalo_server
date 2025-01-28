@@ -8,5 +8,7 @@ export interface Iuser {
   phoneNumber:string;
   userType:UserType
   createdAt:Date,
-  updatedAt:Date
+  updatedAt:Date,
+  resetPasswordToken:string,
+  resetPasswordExpires:Date
 }

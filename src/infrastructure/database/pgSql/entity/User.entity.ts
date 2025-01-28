@@ -23,12 +23,18 @@ export class User implements Iuser {
   @Column({ type: 'varchar', length: 255})
   password: string;
 
-  @UpdateDateColumn()
+  @CreateDateColumn()
   createdAt: Date;
  
  @OneToMany(()=>Photo,(photo)=>photo.user)
   photo:Photo[]
 
-  @CreateDateColumn()
+  @UpdateDateColumn()
   updatedAt: Date;
+
+@Column({nullable:true,type:"timestamp"})
+  resetPasswordExpires: Date;
+
+@Column({nullable:true})
+resetPasswordToken: string;
 }
