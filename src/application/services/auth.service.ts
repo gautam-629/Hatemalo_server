@@ -88,8 +88,29 @@ export class AuthService implements IAuthService {
 
     await this.emailUtil.sendEmail(emailOptions)
 
-    // return  sendEmail;
-
       return { message: "Password reset email sent successfully" };
+    }
+
+
+   async resetPassword(token: string, newPassword: string):Promise<Record<string,string>> {
+        const user= await this.userRepository.findOneByField('resetPasswordToken',token);
+
+         let isTimeExpire;
+         if (user && user.resetPasswordToken !== undefined && user.resetPasswordExpires !== undefined) {
+            isTimeExpire = this.tokenUtil.isTokenExpire(user.resetPasswordExpires);
+        }
+    
+        if(!user || isTimeExpire){
+            throw CustomErrorHandler.badRequest("Invalid or expire Token")
+        }
+
+        const hashPassword = await bcrypt.hash(newPassword, 10);
+
+       await this.userRepository.updateUser(user.id,{
+            resetPasswordExpires:undefined,
+            resetPasswordToken:undefined,
+            password:hashPassword
+        })
+        return { message: "Password reset successfully" };
     }
 }

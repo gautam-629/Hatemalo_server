@@ -10,7 +10,7 @@ export class TokenUtil implements ITokenUtil{
    compareToken(providedToken: string, storedToken: string): boolean {
         return providedToken===storedToken;
    }
-   isTokenExpire(expireAt: Date): boolean {
+   isTokenExpire(expireAt: Date ): boolean {
        return new Date() > expireAt;
    }
 }

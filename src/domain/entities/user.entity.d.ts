@@ -9,6 +9,6 @@ export interface Iuser {
   userType:UserType
   createdAt:Date,
   updatedAt:Date,
-  resetPasswordToken:string,
-  resetPasswordExpires:Date
+  resetPasswordToken:string | undefined,
+  resetPasswordExpires:Date | undefined
 }

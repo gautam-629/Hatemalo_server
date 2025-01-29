@@ -35,7 +35,11 @@ export class UserRepository implements IUserRepository {
 
   async updateUser(id: string, data: Partial<Iuser>): Promise<Iuser | null> {
     await this.userRepository.update(id, data);
-    return this.findById(id); // Assuming findById retrieves the updated user
+    return this.findById(id); 
+}
+
+async findOneByField<T extends keyof User>(field: T, value: User[T]): Promise<Iuser | null> {
+  return this.userRepository.findOneBy({ [field]: value } as any);
 }
 
 }

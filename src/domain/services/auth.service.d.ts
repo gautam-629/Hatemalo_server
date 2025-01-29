@@ -6,5 +6,5 @@ export interface IAuthService{
     register(user:Iuser):Promise<UserDto>
     login(user:LoginUserDto):Promise<UserDto>
     forgotPassword(email:string):Promise<Record<string,string>>
-    // resetPassword(token:string,newPassword:string)
+    resetPassword(token:string,newPassword:string):Promise<string,string>
 }
