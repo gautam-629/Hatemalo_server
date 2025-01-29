@@ -29,9 +29,14 @@ export const authRouter=(router:Router)=>{
         (req:Request,res:Response,next:NextFunction):void=>{
             authController.login(req,res,next)
         })
-        router.post('/auth/forgot-password',
+    router.post('/auth/forgot-password',
             validationMiddleware(forgotPasswordDto),
             (req:Request,res:Response,next:NextFunction):void=>{
                 authController.forgotPassword(req,res,next)
             })
+   router.post('/auth/reset-password/:token',
+             validationMiddleware(forgotPasswordDto),
+             (req:Request,res:Response,next:NextFunction):void=>{
+                    authController.resetPassword(req,res,next)
+             })
 }
