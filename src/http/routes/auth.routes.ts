@@ -10,6 +10,7 @@ import { LoginUserDto } from "../../application/dtos/login.user.dtos";
 import { TokenUtil } from "../../util/tokenUtil";
 import { EmailService } from "../../util/emailUtil";
 import { forgotPasswordDto } from "../../application/dtos";
+import { ResetPasswordDtos } from "../../application/dtos/resetPassword.dtos";
 
 
 const userRepository=new UserRepository()
@@ -35,7 +36,7 @@ export const authRouter=(router:Router)=>{
                 authController.forgotPassword(req,res,next)
             })
    router.post('/auth/reset-password/:token',
-             validationMiddleware(forgotPasswordDto),
+             validationMiddleware(ResetPasswordDtos),
              (req:Request,res:Response,next:NextFunction):void=>{
                     authController.resetPassword(req,res,next)
              })
