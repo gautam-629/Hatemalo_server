@@ -1,4 +1,4 @@
-import { IFileUploader } from "../../common/file.uploader";
+import { IFileUploader } from "../../common/types";
 import { IPhoto } from "../../domain/entities";
 import { IPhotoService } from "../../domain/services";
 import { IUseCase } from "../../domain/usecase/userCase";

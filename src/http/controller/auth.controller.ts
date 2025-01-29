@@ -31,6 +31,16 @@ class AuthController{
             next(error)
          }
     }
+  async forgotPassword(req:Request,res:Response,next:NextFunction){
+  try {
+    const {email}=req.body;
+    const result= await this.authService.forgotPassword(email);
+    ResponseHandler.success(res,result,"sucess",200)
+  } catch (error) {
+    next(error)
+  }
+
+  }
 }
 
 export default AuthController;

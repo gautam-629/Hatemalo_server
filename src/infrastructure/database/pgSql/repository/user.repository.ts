@@ -32,4 +32,10 @@ export class UserRepository implements IUserRepository {
   findByEmail(email: string): Promise<Iuser | null> {
     return this.userRepository.findOneBy({email:email})
   }
+
+  async updateUser(id: string, data: Partial<Iuser>): Promise<Iuser | null> {
+    await this.userRepository.update(id, data);
+    return this.findById(id); // Assuming findById retrieves the updated user
+}
+
 }

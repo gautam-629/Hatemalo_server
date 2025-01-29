@@ -5,4 +5,6 @@ import { Iuser } from "../entities";
 export interface IAuthService{
     register(user:Iuser):Promise<UserDto>
     login(user:LoginUserDto):Promise<UserDto>
+    forgotPassword(email:string):Promise<Record<string,string>>
+    // resetPassword(token:string,newPassword:string)
 }

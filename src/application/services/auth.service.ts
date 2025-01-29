@@ -6,11 +6,14 @@ import bcrypt from 'bcryptjs';
 import { JwtToken } from "../../util/jwtToken";
 import { CreateUserDto, UserDto } from '../dtos/register.user.dtos';
 import { LoginUserDto } from '../dtos/login.user.dtos';
+import { IEmailOptions, IEmailService, ITokenUtil } from '../../common/types';
 
 export class AuthService implements IAuthService {
     constructor(
         private userRepository: UserRepository,
         private jwtToken: JwtToken,
+        private tokenUtil:ITokenUtil,
+        private emailUtil:IEmailService
     ) {}
 
     async register(userData: CreateUserDto): Promise<UserDto> {
@@ -61,4 +64,32 @@ export class AuthService implements IAuthService {
             token
         },{excludeExtraneousValues:true})
     }  
+
+
+    async forgotPassword(email: string): Promise<Record<string,string>> {
+        const user= await this.userRepository.findByEmail(email)
+        if(!user){
+            throw CustomErrorHandler.notFound("Email not found")
+        }
+        
+      const {token:resetPasswordToken,expiresAt:resetPasswordExpires} = this.tokenUtil.generateToken(60)
+
+      await this.userRepository.updateUser(user.id, {
+        resetPasswordToken,
+        resetPasswordExpires
+    });
+      const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetPasswordToken}`;
+
+      const emailOptions:IEmailOptions={
+           to:user.email,
+           html:`<p>Click <a href="${resetUrl}">here</a> to reset your password.</p>`,
+           subject:"Password Reset Request",
+      }
+
+    await this.emailUtil.sendEmail(emailOptions)
+
+    // return  sendEmail;
+
+      return { message: "Password reset email sent successfully" };
+    }
 }

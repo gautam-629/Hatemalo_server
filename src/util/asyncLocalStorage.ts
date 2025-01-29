@@ -1,5 +1,5 @@
 import { NextFunction } from "express";
-import { IAsyncLocalStorage } from "../common";
+import { IAsyncLocalStorage } from "../common/types";
 import { createNamespace, getNamespace } from "cls-hooked";
 import { User } from "../infrastructure/database/pgSql/entity/User.entity";
 

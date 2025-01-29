@@ -7,11 +7,16 @@ import { CreateUserDto } from "../../application/dtos/register.user.dtos";
 import { validationMiddleware } from "../middleware/schemaValidator";
 import logger from "../../config/logger";
 import { LoginUserDto } from "../../application/dtos/login.user.dtos";
+import { TokenUtil } from "../../util/tokenUtil";
+import { EmailService } from "../../util/emailUtil";
+import { forgotPasswordDto } from "../../application/dtos";
 
 
 const userRepository=new UserRepository()
 const jwtToken=new JwtToken()
-const authService=new AuthService(userRepository,jwtToken)
+const tokenUtil=new TokenUtil()
+const emailService=new EmailService()
+const authService=new AuthService(userRepository,jwtToken,tokenUtil,emailService)
 const authController=new AuthController(authService,logger)
 
 export const authRouter=(router:Router)=>{
@@ -24,4 +29,9 @@ export const authRouter=(router:Router)=>{
         (req:Request,res:Response,next:NextFunction):void=>{
             authController.login(req,res,next)
         })
+        router.post('/auth/forgot-password',
+            validationMiddleware(forgotPasswordDto),
+            (req:Request,res:Response,next:NextFunction):void=>{
+                authController.forgotPassword(req,res,next)
+            })
 }

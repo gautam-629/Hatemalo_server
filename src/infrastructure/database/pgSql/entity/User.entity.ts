@@ -32,9 +32,9 @@ export class User implements Iuser {
   @UpdateDateColumn()
   updatedAt: Date;
 
-@Column({nullable:true,type:"timestamp"})
+ @Column({nullable:true,type:"timestamp"})
   resetPasswordExpires: Date;
 
-@Column({nullable:true})
-resetPasswordToken: string;
+ @Column({nullable:true})
+ resetPasswordToken: string;
 }

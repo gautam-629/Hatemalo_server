@@ -1,7 +1,7 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { Config } from "../config";
 import CustomErrorHandler from "./customErrorHandler";
-import { IJwtToken } from "../common";
+import { IJwtToken } from "../common/types";
 
 export interface JwtPayloadWithRole extends JwtPayload {
   sub: string;

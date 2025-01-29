@@ -1,4 +1,4 @@
-import { IAsyncLocalStorage, IFileUploader } from "../../common";
+import { IAsyncLocalStorage, IFileUploader } from "../../common/types";
 import { IPhoto } from "../../domain/entities";
 import { IPhotoRepository, IUserRepository } from "../../domain/repositories";
 import { IUseCase } from "../../domain/usecase/userCase";

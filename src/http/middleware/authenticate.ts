@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { IAsyncLocalStorage } from "../../common";
+import { IAsyncLocalStorage } from "../../common/types";
 import { IUserRepository } from "../../domain/repositories";
 import { UserRepository } from "../../infrastructure/database/pgSql/repository/user.repository";
 import { AsyncLocalStorage } from "../../util/asyncLocalStorage";

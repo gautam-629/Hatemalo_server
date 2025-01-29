@@ -61,6 +61,7 @@
   "dependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/cls-hooked": "^4.3.9",
+    "@types/nodemailer": "^6.4.17",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
@@ -71,6 +72,7 @@
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.10.0",
     "pg": "^8.13.1",
     "reflect-metadata": "^0.1.14",
     "typeorm": "^0.3.20",

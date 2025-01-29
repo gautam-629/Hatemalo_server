@@ -2,7 +2,7 @@ import multer from "multer";
 import { Request } from "express";
 import path from "path";
 import fs from "fs";
-import { IFileUploader } from "../common/file.uploader";
+import { IFileUploader } from "../common/types";
 
 export class FileUploader implements IFileUploader{
   private storage: multer.StorageEngine;
